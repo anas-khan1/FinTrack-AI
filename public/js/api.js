@@ -39,7 +39,9 @@ const API = {
             const res = await fetch(url, { ...options, headers: { ...headers, ...options.headers } });
             const data = await res.json();
             if (!res.ok) {
-                if (res.status === 401) {
+                if (res.status === 401 && token) {
+                    // Only auto-logout if user was already authenticated (expired token etc.)
+                    // Don't logout during login/signup attempts (no token yet)
                     this.logout();
                     return;
                 }

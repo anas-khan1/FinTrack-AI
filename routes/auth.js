@@ -81,7 +81,7 @@ router.delete('/account', authenticate, async (req, res) => {
         // Verify password
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) {
-            return res.status(401).json({ error: 'Incorrect password. Account was NOT deleted.' });
+            return res.status(403).json({ error: 'Incorrect password. Account was NOT deleted.' });
         }
 
         // Delete all user data from every collection
