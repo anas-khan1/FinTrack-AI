@@ -166,6 +166,135 @@ textarea {
     }
 }
 
+/* ── Decorative Background (Landing) ──────────────────────── */
+.bg-grid-pattern {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+}
+
+.bg-cards {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bg-card {
+    position: absolute;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(2px);
+}
+
+.bg-card-1 {
+    width: 340px;
+    height: 200px;
+    bottom: 12%;
+    left: 5%;
+    transform: rotate(-6deg);
+    animation: cardFloat1 20s ease-in-out infinite;
+}
+
+.bg-card-2 {
+    width: 300px;
+    height: 180px;
+    bottom: 8%;
+    right: 4%;
+    transform: rotate(4deg);
+    animation: cardFloat2 24s ease-in-out infinite;
+}
+
+.bg-card-3 {
+    width: 260px;
+    height: 160px;
+    top: 10%;
+    right: 8%;
+    transform: rotate(-3deg);
+    animation: cardFloat3 18s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+/* Simulate card content lines */
+.bg-card::before,
+.bg-card::after {
+    content: '';
+    position: absolute;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.bg-card::before {
+    top: 20px;
+    left: 20px;
+    right: 40%;
+    height: 12px;
+}
+
+.bg-card::after {
+    top: 44px;
+    left: 20px;
+    right: 20px;
+    height: 8px;
+}
+
+/* Extra content lines for card-1 */
+.bg-card-1 {
+    background: linear-gradient(180deg,
+            rgba(99, 102, 241, 0.03) 0%,
+            rgba(255, 255, 255, 0.01) 100%);
+    border-color: rgba(99, 102, 241, 0.06);
+}
+
+.bg-card-2 {
+    background: linear-gradient(180deg,
+            rgba(139, 92, 246, 0.03) 0%,
+            rgba(255, 255, 255, 0.01) 100%);
+    border-color: rgba(139, 92, 246, 0.06);
+}
+
+@keyframes cardFloat1 {
+
+    0%,
+    100% {
+        transform: rotate(-6deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(-4deg) translateY(-12px);
+    }
+}
+
+@keyframes cardFloat2 {
+
+    0%,
+    100% {
+        transform: rotate(4deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(6deg) translateY(-18px);
+    }
+}
+
+@keyframes cardFloat3 {
+
+    0%,
+    100% {
+        transform: rotate(-3deg) translateX(0);
+    }
+
+    50% {
+        transform: rotate(-1deg) translateX(-10px);
+    }
+}
+
 /* ── Landing Page ──────────────────────────────────────────── */
 .landing-wrapper {
     min-height: 100vh;
@@ -1585,6 +1714,51 @@ textarea {
     font-weight: 600;
 }
 
+/* ── Features Strip (Landing Page) ─────────────────────────── */
+.features-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 700px;
+}
+
+.feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, background 0.2s;
+    white-space: nowrap;
+}
+
+.feature-pill:hover {
+    border-color: var(--border-accent);
+    background: var(--bg-glass-hover);
+}
+
+/* ── Landing Footer ───────────────────────────────────────── */
+.landing-footer {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet (≤ 768px) ─────────────────────────────────────── */
 @media (max-width: 768px) {
     .month-picker-label {
         font-size: 0.82rem;
@@ -1598,5 +1772,167 @@ textarea {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .page-header-actions {
+        width: 100%;
+    }
+}
+
+/* ── Mobile (≤ 480px) ─────────────────────────────────────── */
+@media (max-width: 480px) {
+
+    /* Landing nav */
+    .landing-nav {
+        padding: 14px 16px;
+        gap: 8px;
+    }
+
+    .nav-brand {
+        font-size: 1.05rem;
+        gap: 8px;
+    }
+
+    .nav-brand-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav-brand-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .landing-nav .btn {
+        padding: 6px 12px;
+        font-size: 0.78rem;
+    }
+
+    /* Landing hero */
+    .landing-hero {
+        padding: 30px 16px;
+        gap: 24px;
+    }
+
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 6px 14px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        line-height: 1.15;
+    }
+
+    .hero-subtitle {
+        font-size: 0.92rem;
+        line-height: 1.6;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Feature pills — 2 column grid on mobile */
+    .features-strip {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+        padding: 0 4px;
+    }
+
+    .feature-pill {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        gap: 6px;
+        justify-content: center;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .feature-pill-icon svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Auth modal */
+    .auth-card {
+        padding: 28px 20px;
+        margin: 12px;
+    }
+
+    .auth-card h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Dashboard stats */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 14px;
+    }
+
+    .stat-card-value {
+        font-size: 1.3rem;
+    }
+
+    /* Page layout */
+    .page-body {
+        padding: 16px;
+    }
+
+    .page-header {
+        padding: 16px;
+    }
+
+    .page-title {
+        font-size: 1.3rem;
+    }
+
+    /* Data tables — horizontal scroll */
+    .data-table {
+        font-size: 0.8rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+    }
+
+    /* Landing footer */
+    .landing-footer {
+        padding: 16px;
+        font-size: 0.75rem;
+    }
+
+    /* Form rows stack */
+    .form-row {
+        grid-template-columns: 1fr;
     }
 }
