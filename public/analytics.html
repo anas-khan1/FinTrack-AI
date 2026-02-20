@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics — FinTrack AI</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='68' font-size='50' fill='white' text-anchor='middle' font-weight='bold'>F</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="bg-effects"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div></div>
+    <div class="app-layout">
+        <div id="sidebarContainer"></div>
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-inner">
+                    <div>
+                        <button class="mobile-menu-btn" id="mobileMenuBtn"></button>
+                        <h1 class="page-title">Analytics</h1>
+                        <p class="page-subtitle">Smart insights powered by AI</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <div id="analyticsMonthPicker"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-body">
+                <!-- Summary Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-label"><div class="stat-card-icon purple" id="iconScore"></div> Health Score</div>
+                        <div class="stat-card-value score" id="aHealthScore">&mdash;</div>
+                        <div class="stat-card-change">out of 100</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-label"><div class="stat-card-icon red" id="iconTopCat"></div> Top Category</div>
+                        <div class="stat-card-value" id="aTopCategory" style="font-size:1.3rem">&mdash;</div>
+                        <div class="stat-card-change">highest spending</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-label"><div class="stat-card-icon blue" id="iconSavRate"></div> Savings Rate</div>
+                        <div class="stat-card-value savings" id="aSavingsRate">&mdash;</div>
+                        <div class="stat-card-change">of total income</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-label"><div class="stat-card-icon green" id="iconTxn"></div> Transactions</div>
+                        <div class="stat-card-value" id="aTransactions">&mdash;</div>
+                        <div class="stat-card-change">this period</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Category Breakdown</span></div>
+                        <div class="card-body"><div class="chart-container"><canvas id="catBarChart"></canvas></div></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Income vs Expenses (6 Months)</span></div>
+                        <div class="card-body"><div class="chart-container"><canvas id="trendBarChart"></canvas></div></div>
+                    </div>
+                </div>
+
+                <!-- AI Recommendations -->
+                <div class="card" style="margin-top: 20px">
+                    <div class="card-header">
+                        <span class="card-title">AI-Powered Financial Insights</span>
+                        <span style="font-size:0.78rem;color:var(--text-muted)" id="recTimestamp"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="rec-list" id="recList">
+                            <div class="empty-state">
+                                <div class="empty-state-icon" id="emptyAnalyticsIcon"></div>
+                                <div class="empty-state-text">Loading recommendations...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/icons.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/analytics.js"></script>
+</body>
+</html>

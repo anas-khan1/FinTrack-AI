@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses — FinTrack AI</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='68' font-size='50' fill='white' text-anchor='middle' font-weight='bold'>F</text></svg>">
+</head>
+<body>
+    <div class="bg-effects"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div></div>
+    <div class="app-layout">
+        <div id="sidebarContainer"></div>
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-inner">
+                    <div>
+                        <button class="mobile-menu-btn" id="mobileMenuBtn"></button>
+                        <h1 class="page-title">Expenses</h1>
+                        <p class="page-subtitle">Track and manage your spending</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <button class="btn btn-ghost btn-sm" id="exportExpBtn" title="Export CSV"></button>
+                        <button class="btn btn-primary btn-sm" id="addExpenseBtn"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="page-body">
+                <!-- Summary bar -->
+                <div class="summary-bar" id="expSummaryBar">
+                    <div class="summary-stat">Total: <strong id="expTotal">₹0</strong></div>
+                    <div class="summary-stat">Count: <strong id="expCount">0</strong></div>
+                    <div class="summary-stat">Average: <strong id="expAvg">₹0</strong></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Transactions</span>
+                        <select class="form-select" id="categoryFilter" style="max-width:180px">
+                            <option value="">All Categories</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Health">Health</option>
+                            <option value="Education">Education</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="card-body" style="padding:0">
+                        <div id="expenseTableWrap">
+                            <table class="data-table" id="expenseTable">
+                                <thead><tr><th>Date</th><th>Category</th><th>Description</th><th style="text-align:right">Amount</th><th></th></tr></thead>
+                                <tbody id="expenseTbody"></tbody>
+                            </table>
+                        </div>
+                        <div class="empty-state" id="expenseEmpty" style="display:none">
+                            <div class="empty-state-icon" id="emptyExpIcon"></div>
+                            <div class="empty-state-text">No expenses recorded</div>
+                            <div class="empty-state-hint">Click "Add Expense" to start tracking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Expense Modal -->
+    <div class="modal-overlay" id="expenseModal">
+        <div class="modal">
+            <h3 id="expenseModalTitle">Add Expense</h3>
+            <form id="expenseForm">
+                <div class="form-row">
+                    <div class="form-group"><label>Amount (₹)</label><input type="number" class="form-input" id="expAmount" placeholder="0" min="1" step="1" required></div>
+                    <div class="form-group"><label>Category</label>
+                        <select class="form-select" id="expCategory" required>
+                            <option value="Food">Food</option><option value="Transport">Transport</option><option value="Entertainment">Entertainment</option>
+                            <option value="Shopping">Shopping</option><option value="Bills">Bills</option><option value="Health">Health</option>
+                            <option value="Education">Education</option><option value="Travel">Travel</option><option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Description</label><input type="text" class="form-input" id="expDescription" placeholder="What was this for?"></div>
+                <div class="form-group"><label>Date</label><input type="date" class="form-input" id="expDate" required></div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary btn-sm" id="cancelExpenseBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Save Expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/icons.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/expenses.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "fintrack-ai",
+  "version": "1.0.0",
+  "description": "Smart Expense & Budget Planner with AI-powered recommendations — Prompt Builder 2026 Hackathon",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "finance",
+    "expense-tracker",
+    "budget",
+    "ai",
+    "aws",
+    "hackathon"
+  ],
+  "author": "FinTrack AI Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nedb-promises": "^6.2.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "uuid": "^9.0.0"
+  }
+}

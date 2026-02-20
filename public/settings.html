@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings — FinTrack AI</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='68' font-size='50' fill='white' text-anchor='middle' font-weight='bold'>F</text></svg>">
+</head>
+<body>
+    <div class="bg-effects"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div></div>
+    <div class="app-layout">
+        <div id="sidebarContainer"></div>
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-inner">
+                    <div>
+                        <button class="mobile-menu-btn" id="mobileMenuBtn"></button>
+                        <h1 class="page-title">Settings</h1>
+                        <p class="page-subtitle">Manage your account and preferences</p>
+                    </div>
+                </div>
+            </div>
+            <div class="page-body">
+                <div class="settings-grid">
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Profile</span></div>
+                        <div class="card-body">
+                            <div class="settings-section">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" class="form-input" id="settingsName" placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-input" id="settingsEmail" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select class="form-select" id="settingsCurrency">
+                                        <option value="INR">INR (₹)</option>
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="GBP">GBP (£)</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary btn-sm" id="saveProfileBtn">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Data Management</span></div>
+                        <div class="card-body">
+                            <div class="settings-section">
+                                <div class="settings-item">
+                                    <div>
+                                        <div class="settings-item-label">Export All Data</div>
+                                        <div class="settings-item-hint">Download all your financial data as CSV</div>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm" id="exportAllBtn"></button>
+                                </div>
+                                <div class="settings-item">
+                                    <div>
+                                        <div class="settings-item-label">Account Created</div>
+                                        <div class="settings-item-hint" id="settingsCreated">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">About</span></div>
+                        <div class="card-body">
+                            <div class="settings-section">
+                                <div class="settings-item">
+                                    <div>
+                                        <div class="settings-item-label">FinTrack AI</div>
+                                        <div class="settings-item-hint">Version 1.0.0 &mdash; Built for Prompt Builder 2026</div>
+                                    </div>
+                                </div>
+                                <div class="settings-item">
+                                    <div>
+                                        <div class="settings-item-label">Stack</div>
+                                        <div class="settings-item-hint">Node.js, Express, NeDB, Chart.js, AWS</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="border:1px solid var(--danger)">
+                        <div class="card-header"><span class="card-title" style="color:var(--danger)">Danger Zone</span></div>
+                        <div class="card-body">
+                            <div class="settings-section">
+                                <div class="settings-item">
+                                    <div>
+                                        <div class="settings-item-label">Delete Account</div>
+                                        <div class="settings-item-hint">Permanently delete your account and all associated data. This action cannot be undone.</div>
+                                    </div>
+                                    <button class="btn btn-sm" id="deleteAccountBtn" style="background:var(--danger);color:white;border:none;font-size:0.78rem;padding:6px 14px;white-space:nowrap"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Delete Account Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="border:1px solid var(--danger)">
+            <h3 style="color:var(--danger)">Delete Account</h3>
+            <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:16px;margin-bottom:20px">
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                    <div id="deleteWarningIcon" style="color:var(--danger);flex-shrink:0;margin-top:2px"></div>
+                    <div>
+                        <div style="font-weight:600;font-size:0.9rem;margin-bottom:6px;color:var(--danger)">This action is permanent</div>
+                        <div style="font-size:0.84rem;color:var(--text-secondary);line-height:1.6">
+                            All your data will be permanently deleted, including:<br>
+                            &bull; All expense records<br>
+                            &bull; All income entries<br>
+                            &bull; All budget settings<br>
+                            &bull; Your account profile<br><br>
+                            <strong>This cannot be undone.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Enter your password to confirm</label>
+                <input type="password" class="form-input" id="deletePassword" placeholder="Your password" required>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-secondary btn-sm" id="cancelDeleteBtn">Cancel</button>
+                <button class="btn btn-sm" id="confirmDeleteBtn" style="background:var(--danger);color:white;border:none">Delete My Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/icons.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/components.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!requireAuth()) return;
+        document.getElementById('sidebarContainer').innerHTML = renderSidebar('settings');
+        initSidebar();
+        document.getElementById('mobileMenuBtn').innerHTML = Icons.menu;
+        document.getElementById('exportAllBtn').innerHTML = `${Icons.download} Export`;
+
+        const user = API.getUser();
+        if (user) {
+            document.getElementById('settingsName').value = user.name;
+            document.getElementById('settingsEmail').value = user.email;
+        }
+
+        // Export all data
+        document.getElementById('exportAllBtn').addEventListener('click', async () => {
+            try {
+                const [expData, incData] = await Promise.all([
+                    API.get('/expenses?limit=9999'),
+                    API.get('/income?limit=9999')
+                ]);
+                const rows = [['Type', 'Date', 'Category/Source', 'Description', 'Amount']];
+                expData.expenses.forEach(e => rows.push(['Expense', e.date, e.category, e.description || '', -e.amount]));
+                incData.income.forEach(i => rows.push(['Income', i.date, i.source, i.description || '', i.amount]));
+                exportToCSV('fintrack_all_data.csv', rows);
+                showToast('All data exported');
+            } catch (err) { showToast('Export failed', 'error'); }
+        });
+
+        // Save profile (client-side only for now)
+        document.getElementById('saveProfileBtn').addEventListener('click', () => {
+            const name = document.getElementById('settingsName').value.trim();
+            if (!name) { showToast('Name cannot be empty', 'error'); return; }
+            const u = API.getUser();
+            if (u) { u.name = name; API.setUser(u); }
+            showToast('Profile updated');
+        });
+
+        // Delete account
+        document.getElementById('deleteAccountBtn').innerHTML = `${Icons.trash} Delete Account`;
+        document.getElementById('deleteWarningIcon').innerHTML = Icons.alertTriangle;
+        const deleteModal = document.getElementById('deleteModal');
+        document.getElementById('deleteAccountBtn').addEventListener('click', () => {
+            document.getElementById('deletePassword').value = '';
+            deleteModal.classList.add('active');
+        });
+        document.getElementById('cancelDeleteBtn').addEventListener('click', () => deleteModal.classList.remove('active'));
+        deleteModal.addEventListener('click', e => { if (e.target === deleteModal) deleteModal.classList.remove('active'); });
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+            const pw = document.getElementById('deletePassword').value;
+            if (!pw) { showToast('Please enter your password', 'error'); return; }
+            const btn = document.getElementById('confirmDeleteBtn');
+            btn.textContent = 'Deleting...';
+            btn.disabled = true;
+            try {
+                await API.request('/auth/account', {
+                    method: 'DELETE',
+                    body: JSON.stringify({ password: pw })
+                });
+                localStorage.removeItem('fintrack_token');
+                localStorage.removeItem('fintrack_user');
+                window.location.href = '/';
+            } catch (err) {
+                showToast(err.message || 'Failed to delete account', 'error');
+                btn.textContent = 'Delete My Account';
+                btn.disabled = false;
+            }
+        });
+    });
+    </script>
+</body>
+</html>
